@@ -1,6 +1,6 @@
 CC=gcc
-OBJ=$(patsubst %.c,%.o,$(wildcard *.c))
 C_FLAGS=-std=c11
+OBJ=$(patsubst %.c,%.o,$(wildcard *.c))
 
 all: ${OBJ}
 	${CC} -o solution $?

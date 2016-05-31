@@ -1,6 +1,6 @@
 CC=gcc
+C_FLAGS=-std=c11 -D _DEFAULT_SOURCE=1
 OBJ=$(patsubst %.c,%.o,$(wildcard *.c))
-C_FLAGS=-std=c11
 
 all: ${OBJ}
 	${CC} -o solution $?
