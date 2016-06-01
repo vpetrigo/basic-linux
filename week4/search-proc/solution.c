@@ -111,7 +111,11 @@ int count_n_proc(const char * restrict proc_name) {
         if (stat_fd > 0 && look_for_proc_name(stat_fd, proc_name)) {
             ++counter;
         }
+
+        close(stat_fd);
     }
+
+    closedir(proc_dir);
 
     return counter;
 }
