@@ -53,11 +53,12 @@ char *get_stat_content(int stat_file_fd) {
     while ((bytes_read = read(stat_file_fd, data_chunk_buf, CHUNK_SIZE)) > 0) {
         if (cur_data_size == 0) {
             data = calloc(CHUNK_SIZE, sizeof(char));
+            assert(data);
             cur_data_size = CHUNK_SIZE;
         }
         else if (cur_data_size < total_n_bytes + bytes_read) {
             char *new_data = calloc(cur_data_size * 2, sizeof(char));
-            // TODO: check pointer allocations
+            assert(new_data);
             memcpy(new_data, data, total_n_bytes);
             free(data);
             data = new_data;
