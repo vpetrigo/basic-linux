@@ -7,9 +7,6 @@ print_zeroes()
     done
 }
 
-echo $#
-echo $1
-
 if [[ $# -eq 1 ]]; then
     print_zeroes $1
 fi
