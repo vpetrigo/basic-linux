@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case AF_INET6: {
+                // IPv6 address
                 char ipv6_addr[INET6_ADDRSTRLEN];
                 struct sockaddr_in6 *pipv6 = (struct sockaddr_in6 *) it->ai_addr;
 
