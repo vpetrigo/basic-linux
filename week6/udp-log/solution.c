@@ -79,6 +79,10 @@ void wait_for_data(int server_fd) {
     }
 
     for (size_t i = 0; i < max_fd + 1; ++i) {
+      if (!FD_ISSET(i, &temp_read)) {
+        continue;
+      }
+
       if (i == server_fd) {
         int bytes_read =
             recvfrom(server_fd, readbuf, DGRAM_SIZE, MSG_DONTWAIT, NULL, NULL);
