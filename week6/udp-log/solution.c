@@ -33,14 +33,12 @@ int set_non_blocking(int fd) {
 
 int get_socket(void) {
   // create non-blocking UDP socket
-  int server_fd = socket(AF_INET, SOCK_DGRAM, 0);
+  int server_fd = socket(AF_INET, SOCK_DGRAM | SOCK_NONBLOCK, 0);
 
   if (server_fd == -1) {
     perror("Cannot open UDP socket");
     exit(EXIT_FAILURE);
   }
-
-  set_non_blocking(server_fd);
 
   return server_fd;
 }
