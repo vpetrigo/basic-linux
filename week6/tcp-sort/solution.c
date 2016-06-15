@@ -78,6 +78,7 @@ void read_input(int master_fd) {
     fd_set readfd;
     int max_fd = master_fd;
     char read_buf[BUFSIZ];
+    const char *TRANSF_END = "OFF";
     // init all necessary structures  
     bzero(read_buf, BUFSIZ);
     FD_ZERO(&readfd);
@@ -119,6 +120,11 @@ void read_input(int master_fd) {
                 }
                 else {
                     read_buf[bytes_read] = '\0';
+                    // get the end sequence 
+                    if (strcmp(read_buf, TRANSF_END) == 0) {
+                        return;
+                    }
+
                     qsort(read_buf, strlen(read_buf), sizeof(char), char_comp_gr);
                     send(i, read_buf, strlen(read_buf), MSG_NOSIGNAL);
                 }
