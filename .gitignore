@@ -1,2 +1,9 @@
 # ignore object files
 *.o
+*.so
+
+# VS Code
+.vscode/
+
+# IDEA
+.idea/
