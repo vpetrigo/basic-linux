@@ -1,15 +1,18 @@
 CC = gcc
-C_FLAGS = -std=c11 -fPIC
+C_FLAGS = -std=c11
 SRC = solution.c
 OBJ = $(patsubst %.c,%.o,${SRC})
 
 .PHONY: clean
 
-all: solution.o
-	${CC} -shared -o libsolution.so $<
+all: solution test
 
-solution.o: solution.c
-	${CC} -c $< ${C_FLAGS}
+solution: solution.o
+	${CC} -c $(patsubst %.o,%.c,$<) ${C_FLAGS} -fPIC
+	${CC} -o libsolution.so $< -shared
+
+test: test.c
+	${CC} $< -o $@.out -std=c11 -Wl,-rpath . -L . -lsolution
 
 clean:
-	@rm *.o *.so
+	@rm -f *.o *.so *.out
