@@ -1,6 +1,7 @@
 # ignore object files
 *.o
 *.so
+*.out
 
 # VS Code
 .vscode/

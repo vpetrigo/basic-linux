@@ -8,10 +8,12 @@ OBJ = $(patsubst %.c,%.o,${SRC})
 all: solution test
 
 solution: solution.o
-	${CC} -c $(patsubst %.o,%.c,$<) ${C_FLAGS} -fPIC
 	${CC} -o libsolution.so $< -shared
 
-test: test.c
+solution.o: ${SRC}
+	${CC} -c $< ${C_FLAGS} -fPIC
+
+test: test.c solution
 	${CC} $< -o $@.out -std=c11 -Wl,-rpath . -L . -lsolution
 
 clean:
